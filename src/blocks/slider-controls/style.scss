@@ -1,0 +1,52 @@
+.utrb-slider-controls {
+	display: flex;
+	gap: 12px;
+
+	&__button {
+		background-color: transparent;
+		cursor: pointer;
+		border: 1px solid rgba(178, 178, 178, 1);
+		border-radius: 100%;
+		width: 55px;
+		height: 55px;
+		transition: border-color 0.3s ease;
+
+		&:disabled {
+			cursor: not-allowed;
+			border-color: rgba(217, 217, 217, 1);
+		}
+
+		&:focus {
+			outline: none;
+		}
+
+		svg {
+			transition: transform 0.3s ease;
+		}
+
+		&:hover:enabled,
+		&:focus:enabled {
+			border-color: rgba(102, 102, 102, 1);
+		}
+
+		&--next {
+
+			&:hover:enabled {
+
+				svg {
+					transform: translateX(15%);
+				}
+			}
+		}
+
+		&--previous {
+
+			&:hover:enabled {
+
+				svg {
+					transform: translateX(-15%);
+				}
+			}
+		}
+	}
+}

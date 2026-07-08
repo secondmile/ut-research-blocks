@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ut-research-blocks/video-play-pause",
+	"title": "Video Play/Pause Button",
+	"category": "ut-research",
+	"icon": "controls-play",
+	"description": "Standalone play/pause button that controls the nearest core Video block in the same container.",
+	"keywords": [ "video", "play", "pause", "controls" ],
+	"textdomain": "ut-research-blocks",
+	"attributes": {
+		"targetVideoClass": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}

@@ -1,0 +1,105 @@
+@use "sass:math";
+@use "../utilities/mixins";
+@use "../placeholders/skewed-image-frame";
+
+.utrb-new-page-header {
+	overflow-x: clip;
+
+	.wp-block-media-text {
+		grid-template-columns: 100% !important;
+
+		&__media {
+			position: relative;
+			z-index: 1;
+
+			@include mixins.reset-grid-position;
+			@extend %skewed-image-frame;
+			--utrb-skew-scale: 1;
+
+			@include mixins.max-mobile {
+				--utrb-skew-angle: 0deg;
+				--utrb-skew-scale: 1;
+				aspect-ratio: 2/1;
+			}
+
+			img {
+				transform-origin: bottom left;
+			}
+		}
+
+		&:not(.has-media-on-the-right) {
+
+			.wp-block-media-text {
+
+				&__media {
+					transform-origin: top right;
+
+					img {
+						transform-origin: top right;
+					}
+				}
+			}
+		}
+
+
+		&__content {
+			margin-top: 62px;
+			margin-bottom: 75px;
+			padding-left: var(--wp--style--root--padding-left);
+			padding-right: var(--wp--style--root--padding-right);
+			grid-column: 1 !important;
+			grid-row: 2 !important;
+			font-size: var(--wp--preset--font-size--small);
+		}
+	}
+
+	@include mixins.min-tablet {
+		padding-left: var(--wp--style--root--padding-left);
+		padding-right: var(--wp--style--root--padding-right);
+
+		.wp-block-media-text {
+			max-width: var(--wp--style--global--wide-size);
+			margin-left: auto !important;
+			margin-right: auto !important;
+			gap: mixins.fluid-size(10, 78, math.div(mixins.$breakpoint-tablet, 1px));
+
+			&__media {
+
+				@include mixins.auto-grid-position;
+				height: 100%;
+			}
+
+			&:not(.has-media-on-the-right) {
+				grid-template-columns: 1fr 40% !important;
+
+				.wp-block-media-text {
+
+					&__media {
+
+						@include mixins.full-bleed-left;
+					}
+				}
+			}
+
+			&.has-media-on-the-right {
+				grid-template-columns: 40% 1fr !important;
+
+				.wp-block-media-text {
+
+					&__media {
+
+						@include mixins.full-bleed-right;
+					}
+				}
+			}
+
+			&__content {
+				padding: 0;
+				margin-top: var(--utrb-geometric-bg-fade-vertical);
+				margin-bottom: var(--utrb-geometric-bg-fade-vertical);
+
+				@include mixins.auto-grid-position;
+			}
+		}
+	}
+}

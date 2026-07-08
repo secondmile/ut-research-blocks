@@ -1,0 +1,5 @@
+{
+	"*.{js,jsx}": [ "wp-scripts format", "wp-scripts lint-js --fix" ],
+	"*.{css,scss}": [ "wp-scripts lint-style --fix" ],
+	"*.php": [ "composer run format", "composer run lint" ]
+}

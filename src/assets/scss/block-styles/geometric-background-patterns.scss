@@ -1,0 +1,115 @@
+:root {
+	--utrb-geometric-bg-fade-vertical: 64px;
+	--utrb-geometric-bg-fade-horizontal: 86px;
+	--utrb-wireframe-pattern-fade-height: 70px;
+	--utrb-wireframe-pattern-fade-stop: 90%;
+}
+
+.utrb-geometric-bg__content {
+	position: relative;
+	z-index: 0;
+
+	&::before {
+		position: absolute;
+		z-index: -1;
+		content: "";
+		top: calc(-1 * var(--utrb-geometric-bg-fade-vertical));
+		left: calc(-1 * var(--utrb-geometric-bg-fade-horizontal));
+		bottom: calc(-1 * var(--utrb-geometric-bg-fade-vertical));
+		right: calc(-1 * var(--utrb-geometric-bg-fade-horizontal));
+		padding: var(--utrb-geometric-bg-fade-vertical) var(--utrb-geometric-bg-fade-horizontal);
+	}
+}
+
+// Mixin for fade mask effect
+@mixin geometric-bg-fade-mask($color) {
+	mask-image:
+		linear-gradient(to right, transparent 0%, $color 10%, $color 90%, transparent 100%),
+		linear-gradient(to bottom, transparent 0%, $color 10%, $color 90%, transparent 100%);
+	mask-composite: intersect;
+}
+
+// Common styles for all wireframe patterns
+.is-style-utrb-wireframe-pattern-1,
+.is-style-utrb-wireframe-pattern-2,
+.is-style-utrb-wireframe-pattern-3,
+.is-style-utrb-wireframe-pattern-4-gray,
+.is-style-utrb-wireframe-pattern-4-white {
+	background-repeat: no-repeat;
+	background-color: var(--utrb-wireframe-pattern-background-color);
+
+	.utrb-geometric-bg__content::before {
+		background-color: var(--utrb-wireframe-pattern-background-color);
+
+		@include geometric-bg-fade-mask(var(--utrb-wireframe-pattern-background-color));
+	}
+}
+
+// Common fade effect styles
+.utrb-wireframe-pattern__fade-top,
+.utrb-wireframe-pattern__fade-bottom,
+.utrb-wireframe-pattern__fade-both {
+	position: relative;
+}
+
+// Fade-in effect at the top of the pattern
+.utrb-wireframe-pattern__fade-top,
+.utrb-wireframe-pattern__fade-both {
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		inset-inline: 0;
+		height: var(--utrb-wireframe-pattern-fade-height);
+		background: linear-gradient(to top, transparent 0%, var(--utrb-wireframe-pattern-background-color) var(--utrb-wireframe-pattern-fade-stop));
+	}
+}
+
+// Fade-out effect at the bottom of the pattern
+.utrb-wireframe-pattern__fade-bottom,
+.utrb-wireframe-pattern__fade-both {
+
+	&::after {
+		content: "";
+		position: absolute;
+		bottom: 0;
+		inset-inline: 0;
+		height: var(--utrb-wireframe-pattern-fade-height);
+		background: linear-gradient(to bottom, transparent 0%, var(--utrb-wireframe-pattern-background-color) var(--utrb-wireframe-pattern-fade-stop));
+	}
+}
+
+// Gray background patterns (light color)
+.is-style-utrb-wireframe-pattern-1,
+.is-style-utrb-wireframe-pattern-4-gray {
+	--utrb-wireframe-pattern-background-color: var(--wp--preset--color--light);
+}
+
+// White background patterns
+.is-style-utrb-wireframe-pattern-2,
+.is-style-utrb-wireframe-pattern-3,
+.is-style-utrb-wireframe-pattern-4-white {
+	--utrb-wireframe-pattern-background-color: var(--wp--preset--color--white);
+}
+
+// Individual pattern images
+.is-style-utrb-wireframe-pattern-1 {
+	background-image: var(--utrb-wireframe-pattern-1);
+}
+
+.is-style-utrb-wireframe-pattern-2 {
+	background-image: var(--utrb-wireframe-pattern-2);
+}
+
+.is-style-utrb-wireframe-pattern-3 {
+	background-image: var(--utrb-wireframe-pattern-3);
+}
+
+.is-style-utrb-wireframe-pattern-4-gray {
+	background-image: var(--utrb-wireframe-pattern-4-gray);
+}
+
+.is-style-utrb-wireframe-pattern-4-white {
+	background-image: var(--utrb-wireframe-pattern-4-white);
+}

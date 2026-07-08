@@ -1,0 +1,12 @@
+@use "mixins";
+
+:root {
+
+	/* Border Colors */
+	--utrb-color-border-gray: #afafaf; /* Medium gray - used for subtle borders on dark backgrounds */
+
+	/* Spacing */
+	--utrb-carbon-fiber-frame-offset: #{mixins.fluid-size(14, 24)};
+
+	--utrb-skew-angle: 20deg;
+}

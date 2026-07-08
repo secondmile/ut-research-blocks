@@ -1,0 +1,159 @@
+@use "sass:math";
+
+// Breakpoint Mixins
+// Mobile-first responsive design with breakpoints at 768px and 1024px
+
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+
+// Fluid Sizing Function
+// Generates responsive clamp() values that scale between min and max across
+// viewport widths
+// @param {number} $min-px - Minimum size in pixels (at 440px viewport)
+// @param {number} $max-px - Maximum size in pixels (at 1500px viewport)
+// @return {string} - CSS clamp() function
+// Example: fluid-size(10, 20) →
+//   clamp(10px, 0.625rem + ((1vw - 4.4px) * 0.943), 20px)
+// Example: fluid-size(50, 90) →
+//   clamp(50px, 3.125rem + ((1vw - 4.4px) * 3.774), 90px)
+@function fluid-size($min-px, $max-px, $base-vw: 440, $max-vw: 1500) {
+	$min-rem: math.div($min-px, 16);
+	$base-px: math.div($base-vw, 100);
+
+	// Calculate divisor from viewport range
+	$divisor-px: math.div($max-vw - $base-vw, 100);
+
+	// Calculate multiplier
+	$multiplier: math.div($max-px - $min-px, $divisor-px);
+
+	@return clamp(
+		#{$min-px}px,
+		#{$min-rem}rem + ((1vw - #{$base-px}px) * #{$multiplier}),
+		#{$max-px}px
+	);
+}
+
+// Mobile only (max-width: 768px)
+@mixin max-mobile {
+
+	@media (max-width: $breakpoint-tablet) {
+		@content;
+	}
+}
+
+// Tablet and up (min-width: 768px)
+@mixin min-tablet {
+
+	@media (min-width: $breakpoint-tablet) {
+		@content;
+	}
+}
+
+// Tablet and down (max-width: 1024px)
+@mixin max-tablet {
+
+	@media (max-width: $breakpoint-desktop) {
+		@content;
+	}
+}
+
+// Desktop and up (min-width: 1024px)
+@mixin min-desktop {
+
+	@media (min-width: $breakpoint-desktop) {
+		@content;
+	}
+}
+
+// Has Exact Child Count
+// Targets elements that have exactly N children (where Nth child is also
+// the last child)
+// @param {number} $count - The exact number of children to match
+// Example: @include has-exact-children(4) { ... }
+// Generates: &:has(> :nth-child(4):last-child) { ... }
+@mixin has-exact-children($count) {
+	&:has(> :nth-child(#{$count}):last-child) {
+		@content;
+	}
+}
+
+// Has At Least N Children
+// Targets elements that have at least N children
+// @param {number} $count - The minimum number of children to match
+// Example: @include has-at-least-children(3) { ... }
+// Generates: &:has(> :nth-child(n+3)) { ... }
+@mixin has-at-least-children($count) {
+	&:has(> :nth-child(n+#{$count})) {
+		@content;
+	}
+}
+
+// Full-Bleed Layout Mixins
+// Extends elements to viewport edges, accounting for container padding
+// Used for full-width sections that break out of content constraints
+// Returns the calculated margin value for full-bleed effect
+
+@function full-bleed-value($side, $negate: false) {
+
+	@if $side != left and $side != right {
+
+		@error "Invalid $side parameter: #{$side}. Must be one of: left, right";
+	}
+
+	$value: max(( 100vw - var(--wp--style--global--wide-size) ) / 2, var(--wp--style--root--padding-#{$side}));
+
+	@if $negate {
+
+		@return calc(-1 * #{$value});
+	}
+
+	@return $value;
+}
+
+@mixin full-bleed-right($important: false) {
+
+	@if $important {
+		margin-right: full-bleed-value("right", true) !important;
+	} @else {
+		margin-right: full-bleed-value("right", true);
+	}
+}
+
+@mixin full-bleed-left($important: false) {
+
+	@if $important {
+		margin-left: full-bleed-value("left", true) !important;
+	} @else {
+		margin-left: full-bleed-value("left", true);
+	}
+}
+
+@mixin full-bleed-horizontal($important: false) {
+
+	@include full-bleed-left($important);
+	@include full-bleed-right($important);
+}
+
+// Grid Position Utilities
+// Handles WordPress Media Text block grid positioning overrides
+// Used to reset grid positioning on mobile and restore on tablet+
+
+@mixin reset-grid-position {
+	grid-column: 1 !important;
+	grid-row: 1 !important;
+}
+
+@mixin auto-grid-position {
+	grid-column: auto !important;
+	grid-row: auto !important;
+}
+
+@mixin mobile-grid-reset-tablet-auto {
+
+	@include reset-grid-position;
+
+	@include min-tablet {
+
+		@include auto-grid-position;
+	}
+}

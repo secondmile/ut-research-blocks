@@ -1,0 +1,23 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ut-research-blocks/slider-controls",
+	"title": "Slider Controls",
+	"category": "ut-research",
+	"icon": "controls-play",
+	"description": "Navigation controls for slider carousels with previous/next buttons.",
+	"example": {},
+	"attributes": {
+		"bindToSlider": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"supports": {
+		"html": false
+	},
+	"textdomain": "ut-research-blocks",
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}

@@ -1,0 +1,17 @@
+@use "../../assets/scss/utilities/mixins";
+
+.utrb-slide {
+	flex: 0 0 calc(100% / var(--utrb-slides-per-view-mobile, 1));
+	min-width: 0;
+	padding-left: var(--utrb-container-gap-mobile);
+
+	@include mixins.min-tablet {
+		flex: 0 0 calc(100% / var(--utrb-slides-per-view-tablet, 2));
+		padding-left: var(--utrb-container-gap-tablet);
+	}
+
+	@include mixins.min-desktop {
+		flex: 0 0 calc(100% / var(--utrb-slides-per-view-desktop, 4));
+		padding-left: var(--utrb-container-gap-desktop);
+	}
+}

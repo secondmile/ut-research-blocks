@@ -1,0 +1,109 @@
+@use "sass:math";
+@use "../utilities/mixins";
+
+.utrb-research-spotlight {
+	overflow: clip;
+	--spacing-top: #{mixins.fluid-size(70, 80)};
+	--spacing-bottom: #{mixins.fluid-size(74, 97)};
+
+	&__container {
+		gap: 79px;
+
+		@include mixins.max-mobile {
+			padding-bottom: var(--utrb-geometric-bg-fade-vertical);
+			flex-direction: column;
+			align-items: center;
+		}
+	}
+
+	&__content {
+		position: relative;
+		z-index: 1;
+		padding-top: var(--spacing-top);
+		padding-bottom: var(--spacing-bottom);
+
+		@at-root {
+			.utrb-research-spotlight.is-style-utrb-wireframe-pattern-1 #{&},
+			.utrb-research-spotlight.is-style-utrb-wireframe-pattern-4-gray
+			#{&} {
+				background-color: var(--wp--preset--color--white);
+			}
+
+			.utrb-research-spotlight.is-style-utrb-wireframe-pattern-2 #{&},
+			.utrb-research-spotlight.is-style-utrb-wireframe-pattern-3 #{&},
+			.utrb-research-spotlight.is-style-utrb-wireframe-pattern-4-white
+			#{&} {
+				background-color: var(--wp--preset--color--light);
+			}
+		}
+
+		@include mixins.max-mobile {
+			margin-left: calc(-1 * var(--wp--style--root--padding-left)) !important;
+			padding-left: var(--wp--style--root--padding-left);
+			margin-right: calc(-1 * var(--wp--style--root--padding-right)) !important;
+			padding-right: var(--wp--style--root--padding-right);
+		}
+
+		@at-root .utrb-research-spotlight__container.is-style-utrb-show-media-on-left
+		#{&} {
+
+			@include mixins.min-tablet {
+
+				@include mixins.full-bleed-left;
+				padding-left: mixins.full-bleed-value("left");
+				padding-right: mixins.fluid-size(28, 129, math.div(mixins.$breakpoint-tablet, 1px));
+			}
+		}
+
+		@at-root .utrb-research-spotlight__container.is-style-utrb-show-media-on-right
+		#{&} {
+
+			@include mixins.min-tablet {
+				margin-left: 0 !important;
+				padding-left: mixins.fluid-size(28, 129, math.div(mixins.$breakpoint-tablet, 1px));
+
+				@include mixins.full-bleed-right;
+				padding-right: mixins.full-bleed-value("right");
+			}
+		}
+
+		.wp-block-image {
+			height: mixins.fluid-size(244, 392);
+
+			@include mixins.max-mobile {
+				margin-left: calc(-1 * var(--wp--style--root--padding-left)) !important;
+				margin-right: calc(-1 * var(--wp--style--root--padding-right)) !important;
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+		}
+
+		p {
+			font-size: var(--wp--preset--font-size--small);
+		}
+	}
+
+	&__sidebar {
+		min-width: max-content;
+	}
+
+	@include mixins.min-tablet {
+
+		&__container {
+			gap: 24px;
+
+			&.is-style-utrb-show-media-on-right {
+				flex-direction: row-reverse;
+			}
+		}
+
+		&__sidebar {
+			margin-top: var(--spacing-top) !important;
+			margin-bottom: var(--spacing-bottom) !important;
+		}
+	}
+}

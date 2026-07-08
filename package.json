@@ -1,0 +1,36 @@
+{
+	"name": "ut-research-blocks",
+	"version": "1.0.0",
+	"description": "Research-focused blocks, patterns, and styles for University of Tennessee",
+	"scripts": {
+		"format": "wp-scripts format",
+		"format:all": "npm run format && composer run format",
+		"lint:css": "wp-scripts lint-style",
+		"lint:css:fix": "wp-scripts lint-style --fix",
+		"lint:js": "wp-scripts lint-js",
+		"lint:js:fix": "wp-scripts lint-js --fix",
+		"lint:php": "composer run lint",
+		"lint:all": "npm run lint:js && npm run lint:css && npm run lint:php",
+		"start": "wp-scripts start",
+		"build": "wp-scripts build",
+		"create-block": "cd ./src/blocks && wp-create-block --no-plugin --namespace ut-research-blocks --textdomain ut-research-blocks --category ut-research",
+		"prepare": "husky"
+	},
+	"devDependencies": {
+		"@wordpress/create-block": "^4.82.0",
+		"@wordpress/scripts": "^26.16.0",
+		"glob": "^13.0.4",
+		"husky": "^9.1.7",
+		"lint-staged": "^16.2.7"
+	},
+	"dependencies": {
+		"@wordpress/block-editor": "^12.16.0",
+		"@wordpress/blocks": "^12.25.0",
+		"@wordpress/components": "^25.14.0",
+		"@wordpress/element": "^5.25.0",
+		"@wordpress/i18n": "^4.48.0",
+		"ajv": "^8.17.1",
+		"classnames": "^2.3.2",
+		"embla-carousel": "^8.6.0"
+	}
+}

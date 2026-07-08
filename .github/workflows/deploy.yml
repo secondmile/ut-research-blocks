@@ -1,0 +1,56 @@
+# Deploy Plugin (configure before use)
+#
+# Intentionally left as a configurable template by Second Mile for UT's dev team.
+# Environment-specific deploy settings were removed so you can wire this to your
+# own WP Engine environment or replace the deploy step with your hosting workflow.
+#
+# Setup: see .github/workflows/README.md
+# After configuring repository secrets/variables, test with "Run workflow", then
+# optionally uncomment the push trigger below for automatic deploys on main.
+
+name: Deploy Plugin (configure before use)
+
+on:
+    workflow_dispatch:
+    # Uncomment after secrets and variables are configured:
+    # push:
+    #     branches:
+    #         - main
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+                  cache: 'npm'
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Build assets
+              run: npm run build
+
+            - name: Create distribution folder with rsync
+              run: |
+                  mkdir -p dist
+                  # Use .distignore to exclude development files before rsync deploy
+                  # This ensures the --delete flag in the deploy step removes ignored files from the remote
+                  rsync -av --exclude-from='.distignore' . dist/
+
+            # Replace this step with your own SSH/rsync action if not deploying to WP Engine.
+            - name: Deploy to WP Engine
+              uses: wpengine/github-action-wpe-site-deploy@v3
+              with:
+                  WPE_SSHG_KEY_PRIVATE: ${{ secrets.WPE_SSHG_KEY_PRIVATE }}
+                  WPE_ENV: ${{ vars.WPE_ENV }}
+                  REMOTE_PATH: ${{ vars.DEPLOY_REMOTE_PATH || 'wp-content/plugins/ut-research-blocks/' }}
+                  SRC_PATH: 'dist/'
+                  PHP_LINT: TRUE
+                  CACHE_CLEAR: TRUE
+                  FLAGS: '-azvr --inplace --delete'

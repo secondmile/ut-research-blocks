@@ -1,0 +1,62 @@
+@use "../utilities/mixins";
+@use "sass:math";
+
+.utrb-carousel-with-controls {
+
+	&__container {
+		gap: 2.125rem;
+	}
+
+	&__content {
+		flex: 1;
+	}
+
+	&__slider-wrapper {
+		width: 75%;
+	}
+
+	.utrb-slide {
+
+		.wp-block-image img {
+			width: 100%;
+			height: auto;
+			object-fit: cover;
+			aspect-ratio: var(--wp--preset--aspect-ratio--4-3);
+		}
+
+		&__content {
+			margin-top: 1.375rem;
+
+			*:not(:first-child) {
+				margin-top: 1rem;
+			}
+		}
+
+		p {
+			font-size: var(--wp--preset--font-size--small);
+		}
+	}
+
+	@include mixins.max-tablet {
+
+		&__container {
+			flex-direction: column;
+		}
+
+		&__content {
+			order: -1;
+		}
+
+		&__slider-wrapper {
+			width: 100vw;
+			margin-left: calc(var(--wp--style--root--padding-left) * -1) !important;
+		}
+
+		.utrb-slide {
+
+			&__content {
+				padding: 0 mixins.fluid-size(10, 18, 440, math.div(mixins.$breakpoint-desktop, 1px) - 1);
+			}
+		}
+	}
+}

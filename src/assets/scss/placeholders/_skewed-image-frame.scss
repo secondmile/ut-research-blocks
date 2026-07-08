@@ -1,0 +1,25 @@
+// Skewed image frame effect with counter-skewed content
+// Used for creating angled image containers with properly oriented images
+
+// Frame-only rules (can be used standalone)
+%skewed-frame {
+	overflow: hidden;
+	transform: skew(calc(-1 * var(--utrb-skew-angle)));
+	transform-origin: bottom left;
+}
+
+// Complete skewed image frame with counter-skewed content
+%skewed-image-frame {
+
+	@extend %skewed-frame;
+
+	img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transform: skew(var(--utrb-skew-angle));
+		transform:
+			skew(var(--utrb-skew-angle))
+			scale(var(--utrb-skew-scale, 1.25));
+	}
+}

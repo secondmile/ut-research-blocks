@@ -1,0 +1,58 @@
+.utrb-video-play-pause {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	border: none;
+	background: rgba(0, 0, 0, 0.4);
+	cursor: pointer;
+	width: 72px;
+	height: 72px;
+	border-radius: 100%;
+	transition: background-color 0.2s ease;
+
+	&:hover {
+		background: rgba(0, 0, 0, 0.6);
+	}
+
+	&:focus {
+		background-color: rgba(0, 0, 0, 0.7);
+		outline: none;
+	}
+
+	&:active {
+		background: rgba(0, 0, 0, 0.8);
+	}
+
+	// Icon styling
+	svg {
+		width: 19px;
+		height: 21px;
+		display: inline-block;
+
+		// Default state: show play icon, hide pause icon
+		&:first-child {
+			display: inline-block;
+		}
+
+		&:last-child {
+			display: none;
+		}
+
+	}
+
+	// Playing state: hide play icon, show pause icon
+	&[aria-pressed="true"] {
+
+		svg {
+
+			&:first-child {
+				display: none;
+			}
+
+			&:last-child {
+				display: inline-block;
+			}
+		}
+	}
+
+}

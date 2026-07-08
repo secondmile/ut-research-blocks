@@ -1,0 +1,28 @@
+.wp-block-query-pagination {
+	font-size: 18px;
+	font-weight: 600;
+
+	.wp-block-query-pagination-numbers {
+
+		.page-numbers {
+			text-decoration: none;
+
+			&.current {
+				background-color: var(--wp--custom--color--river);
+				border-radius: 5px;
+				color: #fff;
+				padding: 8px 14px;
+
+				&:hover {
+					background-color: var(--wp--preset--color--smokey);
+					cursor: pointer;
+				}
+			}
+		}
+	}
+
+	.wp-block-query-pagination-next,
+	.wp-block-query-pagination-previous {
+		text-decoration: none;
+	}
+}

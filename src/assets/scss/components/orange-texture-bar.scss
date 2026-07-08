@@ -1,0 +1,52 @@
+@use "../utilities/mixins";
+
+.utrb-orange-texture-bar {
+	overflow: hidden;
+
+	&__container {
+		overflow: hidden;
+		height: 30px;
+
+		&:has(.wp-block-separator.is-style-utrb-skewed-left) {
+			transform: skew(var(--utrb-skew-angle));
+			transform-origin: top left;
+		}
+
+		&:has(.wp-block-separator.is-style-utrb-skewed-right) {
+			transform: skew(calc(-1 * var(--utrb-skew-angle)));
+			transform-origin: top right;
+		}
+	}
+
+	.wp-block-separator {
+		border: none;
+		height: 100%;
+		background-image: var(--utrb-carbon-fiber-bg-768x30-url);
+		background-repeat: no-repeat;
+		background-color: var(--wp--preset--color--orange);
+
+		&.is-style-utrb-skewed-left {
+			transform: skew(calc(-1 * var(--utrb-skew-angle)));
+			transform-origin: top left;
+		}
+
+		&.is-style-utrb-skewed-right {
+			transform: skew(var(--utrb-skew-angle));
+			transform-origin: top right;
+		}
+	}
+
+	@include mixins.min-tablet {
+
+		.wp-block-separator {
+			background-image: var(--utrb-carbon-fiber-bg-1024x30-url);
+		}
+	}
+
+	@include mixins.min-desktop {
+
+		.wp-block-separator {
+			background-image: var(--utrb-carbon-fiber-bg-3840x30-url);
+		}
+	}
+}

@@ -1,0 +1,17 @@
+.utrb-slider {
+	overflow: hidden;
+
+	&__container {
+		display: flex;
+		margin-left: calc(var(--utrb-container-gap-mobile) * -1);
+		touch-action: pan-y pinch-zoom;
+
+		@media ( min-width: 768px ) {
+			margin-left: calc(var(--utrb-container-gap-tablet) * -1);
+		}
+
+		@media ( min-width: 1024px ) {
+			margin-left: calc(var(--utrb-container-gap-desktop) * -1);
+		}
+	}
+}

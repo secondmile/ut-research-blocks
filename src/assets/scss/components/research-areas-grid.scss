@@ -1,0 +1,72 @@
+@use "../utilities/mixins";
+
+.utrb-research-areas-grid {
+	overflow-x: clip;
+
+	&__container {
+		--gap: #{mixins.fluid-size(10, 28)};
+		--columns: 1;
+		position: relative;
+		padding-top: mixins.fluid-size(20, 28);
+		padding-bottom: mixins.fluid-size(20, 28);
+		z-index: 0;
+		gap: var(--gap) !important;
+		align-items: stretch !important;
+
+		&::before,
+		&::after {
+			content: "";
+			position: absolute;
+			z-index: -1;
+			background-image: var(--utrb-carbon-fiber-bg-768x512-url);
+			background-repeat: no-repeat;
+			background-color: var(--wp--preset--color--orange);
+			inset-inline: calc(mixins.fluid-size(16, 32) * -1);
+			height: mixins.fluid-size(227, 265);
+		}
+
+		&::before {
+			top: 0;
+		}
+
+		&::after {
+			bottom: 0;
+		}
+
+		.utrb-research-area-card {
+			width: calc((100% - (var(--columns) - 1) * var(--gap)) / var(--columns));
+		}
+
+	}
+
+	@include mixins.min-tablet {
+
+		&__container {
+			--columns: 2;
+
+			&::before,
+			&::after {
+				background-image: var(--utrb-carbon-fiber-bg-1024x683-url);
+			}
+
+			.utrb-research-area-card {
+				max-width: 482px;
+			}
+		}
+	}
+
+	@include mixins.min-desktop {
+
+		&__container {
+
+			&--three-columns {
+				--columns: 3;
+			}
+
+			&::before,
+			&::after {
+				background-image: var(--utrb-carbon-fiber-bg-2000x1334-url);
+			}
+		}
+	}
+}

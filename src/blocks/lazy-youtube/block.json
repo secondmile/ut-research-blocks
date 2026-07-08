@@ -1,0 +1,159 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "ut-research-blocks/lazy-youtube",
+	"title": "Lazy YouTube",
+	"category": "ut-research",
+	"icon": "video-alt2",
+	"description": "Embed YouTube videos with lazy loading, inline or modal playback, and advanced player controls",
+	"keywords": [
+		"youtube",
+		"video",
+		"lazy",
+		"modal",
+		"inline",
+		"embed",
+		"player"
+	],
+	"textdomain": "ut-research-blocks",
+	"attributes": {
+		"videoId": {
+			"type": "string",
+			"default": ""
+		},
+		"thumbnailType": {
+			"type": "string",
+			"default": "youtube",
+			"enum": [ "youtube", "custom" ]
+		},
+		"thumbnailWidth": {
+			"type": "number",
+			"default": 1280
+		},
+		"thumbnailHeight": {
+			"type": "number",
+			"default": 720
+		},
+		"thumbnailUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"youtubeThumbnailSize": {
+			"type": "string",
+			"default": "maxresdefault",
+			"enum": [
+				"default",
+				"mqdefault",
+				"hqdefault",
+				"sddefault",
+				"maxresdefault"
+			]
+		},
+		"customThumbnailId": {
+			"type": "number",
+			"default": 0
+		},
+		"customThumbnailSize": {
+			"type": "string",
+			"default": "full"
+		},
+		"imgAlt": {
+			"type": "string",
+			"default": "YouTube video thumbnail"
+		},
+		"caption": {
+			"type": "string",
+			"default": ""
+		},
+		"captionPosition": {
+			"type": "string",
+			"default": "bottom",
+			"enum": [ "top", "bottom" ]
+		},
+		"captionAlignment": {
+			"type": "string",
+			"default": "left",
+			"enum": [ "left", "center", "right" ]
+		},
+		"loading": {
+			"type": "string",
+			"default": "lazy",
+			"enum": [ "lazy", "eager" ]
+		},
+		"aspectRatio": {
+			"type": "string",
+			"default": "landscape",
+			"enum": [ "landscape", "portrait" ]
+		},
+		"autoPlayOnViewport": {
+			"type": "boolean",
+			"default": false
+		},
+		"playerControls": {
+			"type": "string",
+			"default": "youtube",
+			"enum": [ "youtube", "none", "custom" ]
+		},
+		"playerRelated": {
+			"type": "boolean",
+			"default": false
+		},
+		"playerFullscreen": {
+			"type": "boolean",
+			"default": true
+		},
+		"playerLoop": {
+			"type": "boolean",
+			"default": false
+		},
+		"playerMute": {
+			"type": "boolean",
+			"default": false
+		},
+		"playButtonHorizontalAlignment": {
+			"type": "string",
+			"default": "center",
+			"enum": [ "flex-start", "center", "flex-end" ]
+		},
+		"playButtonVerticalAlignment": {
+			"type": "string",
+			"default": "center",
+			"enum": [ "top", "center", "bottom" ]
+		},
+		"playButtonWidthPercentage": {
+			"type": "number",
+			"default": 20
+		},
+		"customPlayButtonHorizontalPosition": {
+			"type": "string",
+			"default": "right",
+			"enum": [ "left", "center", "right" ]
+		},
+		"customPlayButtonVerticalPosition": {
+			"type": "string",
+			"default": "bottom",
+			"enum": [ "top", "center", "bottom" ]
+		},
+		"customPlayButtonWidth": {
+			"type": "number",
+			"default": 72
+		},
+		"customPlayButtonVisibility": {
+			"type": "string",
+			"default": "always",
+			"enum": [ "always", "on-hover" ]
+		},
+		"playbackMode": {
+			"type": "string",
+			"default": "inline",
+			"enum": [ "inline", "modal" ]
+		}
+	},
+	"supports": {
+		"html": false,
+		"align": [ "wide", "full" ]
+	},
+	"editorScript": "file:./index.js",
+	"style": "file:./style-index.css",
+	"viewScript": "file:./view.js"
+}
